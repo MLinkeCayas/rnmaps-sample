@@ -25,7 +25,7 @@ export default function TabTwoScreen() {
   );
 
   const debouncedSetRegion = useMemo(
-    () => debounce((newRegion: Region) => setRegion(newRegion), 1000),
+    () => debounce((newRegion: Region) => setRegion(newRegion), 300),
     [],
   );
 
@@ -47,13 +47,6 @@ export default function TabTwoScreen() {
         style={{ flex: 1 }}
         region={region}
         onRegionChangeComplete={handleRegionChange}
-        showsUserLocation={true}
-        showsMyLocationButton={true}
-        showsCompass={true}
-        showsScale={true}
-        showsTraffic={true}
-        showsBuildings={true}
-        showsPointsOfInterest={true}
       >
         {superchargers?.map((supercharger) => (
           <Marker
