@@ -17,11 +17,19 @@ export const useSuperchargerRegion = (
   latitudeDelta: number,
   longitudeDelta: number,
 ) => {
-  return useSupercharger().data?.filter(
-    (supercharger: SuperchargerData) =>
-      supercharger.latitude >= latitude - latitudeDelta &&
-      supercharger.latitude <= latitude + latitudeDelta &&
-      supercharger.longitude >= longitude - longitudeDelta &&
-      supercharger.longitude <= longitude + longitudeDelta,
-  );
+  const superchargers = useSupercharger();
+
+  if (!superchargers.data) return superchargers;
+
+  return {
+    ...superchargers,
+    data:
+      superchargers.data?.filter(
+        (supercharger: SuperchargerData) =>
+          supercharger.latitude >= latitude - latitudeDelta &&
+          supercharger.latitude <= latitude + latitudeDelta &&
+          supercharger.longitude >= longitude - longitudeDelta &&
+          supercharger.longitude <= longitude + longitudeDelta,
+      ) ?? [],
+  };
 };
